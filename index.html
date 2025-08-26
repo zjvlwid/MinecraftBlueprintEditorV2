@@ -1,0 +1,337 @@
+
+<script>
+  imglinks = [
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+];
+
+ imglinks2 = [
+];
+
+  
+</script> 
+  
+
+
+<script>
+     rows = 10;
+     cols = 10;
+     sellSize = 20+"px";
+</script>
+
+
+
+
+
+<style>
+    #testTable , #testTable4
+   { 
+      border-collapse: collapse;
+      background-color: #FFFFFF;
+   }
+    #testTable td , #testTable4 td {
+        border: 1px solid black;
+        padding: 0;
+    }
+
+    #testTable td:nth-child(5n), #testTable4 td:nth-child(5n) {
+        border-right-width: 2px;
+    }
+
+    #testTable tr:nth-child(5n) td, #testTable4 tr:nth-child(5n) td {
+        border-bottom-width: 2px;
+    }
+  
+  /*드래그방지*/
+  img {
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    pointer-events: none; /* 이를 추가하여 드래그를 방지합니다. */
+}
+</style>
+
+
+<br>
+도면
+<br>
+<br>
+<div style="width:100%;">
+    <div style="float:left; margin-left:20px; margin-top:20px;">
+        도면(블록)
+        <table id="testTable" border="1" bordercolor="black"></table>
+    </div>
+    <div style="float:left; margin-left:20px; margin-top:20px;">
+        도면(방향)
+        <table id="testTable4" border="1" bordercolor="black"></table>
+    </div>
+</div>
+
+
+
+
+
+<script>
+  imgIndex=4; //초기블록 설정
+  imgIndex2=0;
+  changeMode=false;
+  
+  selectUISize="48px";
+  
+document.addEventListener('mousedown', function() {
+  changeMode=true;
+});
+
+document.addEventListener('mouseup', function() {
+  changeMode=false;
+});
+  
+document.addEventListener('dragstart', function(e) {
+  /*드래그방지*/
+    e.preventDefault();
+});
+  
+  function updateTableSize() {
+    table = document.getElementById("testTable");
+    while (table.firstChild) {
+        table.removeChild(table.firstChild);
+    }
+
+    table2 = document.getElementById("testTable4");
+    while (table2.firstChild) {
+        table2.removeChild(table2.firstChild);
+    }
+    
+    
+  for(i=0;i<2;i++)
+  {
+    tb = document.getElementById("testTable");
+    if(i==1)
+    {
+      tb = document.getElementById("testTable4");
+    }
+    for(y=0;y<cols;y++)
+    {
+      tr = document.createElement('tr');
+      tb.appendChild(tr);
+      for(x=0;x<rows;x++)
+      {
+          td = document.createElement('td');
+          td.style.width = sellSize;
+          td.style.height = td.style.width;
+          tr.appendChild(td);
+          {
+            img = document.createElement('img');
+            img.style.width =  td.style.width;
+            img.style.height = img.style.width;
+            
+            if(i==0)
+            {
+              img.src = imglinks[0];
+              (function(td,img) 
+              {
+                  td.addEventListener('mousedown', function() 
+                  {
+                      img.src=imglinks[imgIndex];
+                  });
+                  td.addEventListener('mouseover', function() 
+                  {
+                    if(changeMode)
+                    {
+                      img.src=imglinks[imgIndex];
+                    }
+                  });
+              })(td,img);
+            }
+            else
+            {
+              img.src = imglinks2[0];
+              (function(td,img) 
+              {
+                  td.addEventListener('mousedown', function() 
+                  {
+                      img.src=imglinks2[imgIndex2];
+                  });
+                  td.addEventListener('mouseover', function() 
+                  {
+                    if(changeMode)
+                    {
+                      img.src=imglinks2[imgIndex2];
+                    }
+                  });
+              })(td,img);
+            }
+            td.appendChild(img);
+          }
+      }
+    }
+  }
+  
+
+  
+}
+updateTableSize();
+  
+</script> 
+
+
+
+
+
+
+<div style="clear:both;">
+<br>
+<br>
+<br>
+블록
+<br>
+    <table id="testTable2" border="1" bordercolor="black"></table>
+</div>
+
+
+<style>
+   table
+   { 
+      border-collapse: collapse;
+   }
+   
+</style>
+<script>
+  
+  tb = document.getElementById("testTable2");
+  for(y=0;y<imglinks.length/10;y++)
+  {
+    tr = document.createElement('tr');
+    tb.appendChild(tr);
+    for(x=0;x<Math.min(imglinks.length,10);x++)
+    {
+        var index=y*10+x;
+        if(index>=imglinks.length)
+        {
+          break;
+        }
+        td = document.createElement('td');
+        tr.appendChild(td);
+        {
+          img = document.createElement('img');
+          img.src = imglinks[index];
+          img.style.width = selectUISize;
+          img.style.height = img.style.width;
+          img.style.verticalAlign = "bottom";
+          (function(td,index,img) 
+          {
+              td.addEventListener('click', function() 
+              {
+                imgIndex=index;
+              });
+          })(td,index,img);
+          td.appendChild(img);
+        }
+    }
+  }
+  
+  
+</script> 
+
+
+
+
+<br>
+<br>
+<br>
+
+방향
+<br>
+
+ <table id="testTable3" border="1" bordercolor="black" ></table><style>
+   table
+   { 
+      border-collapse: collapse;
+   }
+   
+</style>
+<script>
+  
+  tb = document.getElementById("testTable3");
+  for(y=0;y<1;y++)
+  {
+    tr = document.createElement('tr');
+    tb.appendChild(tr);
+    for(x=0;x<imglinks2.length;x++)
+    {
+        td = document.createElement('td');
+        tr.appendChild(td);
+        {
+          img = document.createElement('img');
+          img.src = imglinks2[x];
+          img.style.width = selectUISize;
+          img.style.height = img.style.width;
+          (function(td,x,img) 
+          {
+              td.addEventListener('click', function() 
+              {
+                imgIndex2=x;
+              });
+          })(td,x,img);
+          td.appendChild(img);
+        }
+    }
+  }
+  
+  
+</script> 
+
+<br>
+<br>
+
+<label for="colorPicker">도면배경색 선택:</label>
+<input type="color" id="colorPicker" name="colorPicker" value="#ffffff">
+<button onclick="changeBackgroundColor()">적용</button>
+
+<br>
+
+<script>
+function changeBackgroundColor() {
+    var selectedColor = document.getElementById("colorPicker").value;
+    document.getElementById("testTable").style.backgroundColor = selectedColor;
+    document.getElementById("testTable4").style.backgroundColor = selectedColor;
+}
+</script>
+
+
+<br>
+wid: <input id="rowInput" type="number" min="1" value="10">
+hei: <input id="colInput" type="number" min="1" value="10">
+<button onclick="resizeTable()">적용</button>
+
+<script>
+function resizeTable() {
+     rows = document.getElementById("rowInput").value;
+     cols = document.getElementById("colInput").value;
+    updateTableSize();
+}
+function resizeSell() {
+     sellSize = document.getElementById("sellSize").value+"px";
+    updateTableSize();
+}
+</script>
+
+<br>
+<br>
+
+
+Sell Size: <input id="sellSize" type="number" min="8" value="20">
+<button onclick="resizeSell()">적용</button>
