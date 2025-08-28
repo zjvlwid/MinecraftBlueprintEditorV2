@@ -1,17 +1,29 @@
 
 <script>
+  folder = "/Assets/HD"; // 필요할 때 "/Assets/64px" 로 바꿔주면 됨
+  
   imglinks = [
-  "https://github.com/user-attachments/assets/5bf98cec-a25a-4bab-9131-b3943203cc36",
-  "https://github.com/user-attachments/assets/0ca4d318-00f5-402c-85ee-fde8d20fdfad",
-  "https://github.com/user-attachments/assets/b383f96d-768b-4ff7-b091-7139e13ba9e4",
-  "https://github.com/user-attachments/assets/bd5711e5-ff49-438a-b990-a7dcc12889d0",
-  "https://github.com/user-attachments/assets/cb25f412-25a2-4c78-8844-959ca61059d3",
-  "https://github.com/user-attachments/assets/d25b1613-c251-4c52-8b51-24f1850b5586",
-  "https://github.com/user-attachments/assets/55eff5e6-7a43-4773-b010-b434950972ac"
+    "Chest.png",
+    "Barrel.png",
+    "Dirt.png",
+    "Cobblestone.png",
+    "Farmland.png",
+    "Glass.png",
+    "Wool.png",
+    "Mycelium.png",
+    "Glowstone.png",
+    "Water.png",
+    "Lava.png",
+    "RedMushroom.png",
+    "BrownMushroom.png",
+    "Stem.png",
+    "Melon.png",
+    "CarvedPumpkin.png"
+  ].map(file => `${folder}/${file}`);
+  
+  // 확인용 출력
+  console.log(images);
 
-
-
-];
 
  imglinks2 = [
   "https://github.com/user-attachments/assets/5bf98cec-a25a-4bab-9131-b3943203cc36",
